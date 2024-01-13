@@ -2,7 +2,7 @@ ARG TAG
 ARG POSTGRES_VERSION
 FROM scratch as nothing
 ARG TARGETARCH
-FROM tensorchord/pgvecto-rs-binary:${TAG}-${TARGETARCH} as binary
+FROM rounakdatta/pgvecto-rs-binary:${TAG}-${TARGETARCH} as binary
 
 FROM postgres:14.5
 COPY --from=binary /pgvecto-rs-binary-release.deb /tmp/vectors.deb
