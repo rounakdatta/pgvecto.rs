@@ -57,14 +57,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - { version: 14, platform: amd64, arch: x86_64 }
-          - { version: 14, platform: arm64, arch: aarch64 }
           - { version: 14.5, platform: amd64, arch: x86_64 }
           - { version: 14.5, platform: arm64, arch: aarch64 }
-          - { version: 15, platform: amd64, arch: x86_64 }
-          - { version: 15, platform: arm64, arch: aarch64 }
-          - { version: 16, platform: amd64, arch: x86_64 }
-          - { version: 16, platform: arm64, arch: aarch64 }
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -134,14 +128,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - { version: 14, platform: amd64, arch: x86_64 }
-          - { version: 14, platform: arm64, arch: aarch64 }
           - { version: 14.5, platform: amd64, arch: x86_64 }
           - { version: 14.5, platform: arm64, arch: aarch64 }
-          - { version: 15, platform: amd64, arch: x86_64 }
-          - { version: 15, platform: arm64, arch: aarch64 }
-          - { version: 16, platform: amd64, arch: x86_64 }
-          - { version: 16, platform: arm64, arch: aarch64 }
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -173,10 +161,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - { version: 14 }
           - { version: 14.5 }
-          - { version: 15 }
-          - { version: 16 }
     steps:
       - name: Checkout
         uses: actions/checkout@v3
