@@ -112,12 +112,10 @@ jobs:
     strategy:
       matrix:
         arch: [amd64, arm64]
-        version: [14, 15, 16]
+        version: [14]
         include:
           - arch: amd64
             full_arch: x86_64
-          - arch: arm64
-            full_arch: aarch64
     needs: setup
     runs-on: ubuntu-20.04
     if: ${{ needs.setup.outputs.recheck == 'true' }}
@@ -200,13 +198,13 @@ jobs:
           push: true
           platforms: "linux/${{ matrix.arch }}"
           file: ./docker/binary_release.Dockerfile
-          tags: tensorchord/pgvecto-rs-binary:pg${{ matrix.version }}-${{ needs.setup.outputs.version }}-${{ matrix.arch }}
+          tags: rounakdatta/pgvecto-rs-binary:pg${{ matrix.version }}-${{ needs.setup.outputs.version }}-${{ matrix.arch }}
   multi_platform_image:
     needs: ['release', 'setup']
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        version: [14, 15, 16]
+        version: [14]
     steps:      
       - name: Checkout
         uses: actions/checkout@v3
@@ -226,20 +224,20 @@ jobs:
         with:
           context: .          
           push: true
-          platforms: "linux/amd64,linux/arm64"
+          platforms: "linux/amd64"
           file: ./docker/pgvecto-rs.Dockerfile
           build-args: |
             TAG=pg${{ matrix.version }}-${{ needs.setup.outputs.version }}
             POSTGRES_VERSION=${{ matrix.version }}
-          tags: tensorchord/pgvecto-rs:pg${{ matrix.version }}-${{ needs.setup.outputs.version }}, tensorchord/pgvecto-rs:pg${{ matrix.version }}-latest      
+          tags: rounakdatta/pgvecto-rs:pg${{ matrix.version }}-${{ needs.setup.outputs.version }}, rounakdatta/pgvecto-rs:pg${{ matrix.version }}-latest      
       - name: Set postgres 16 image as the latest
         uses: docker/build-push-action@v4
         with:
           context: .          
           push: true
-          platforms: "linux/amd64,linux/arm64"
+          platforms: "linux/amd64"
           file: ./docker/pgvecto-rs.Dockerfile
           build-args: |
             TAG=pg16-${{ needs.setup.outputs.version }}
             POSTGRES_VERSION=16
-          tags: tensorchord/pgvecto-rs:latest
+          tags: rounakdatta/pgvecto-rs:latest
